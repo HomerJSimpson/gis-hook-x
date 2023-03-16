@@ -97,8 +97,12 @@ function App() {
       <div className="test-ui">
         <div className="item">
           <span>Sheetname:</span>
-          <input type="text" />
-          <button>create sheet</button>
+          <input
+            type="text"
+            disabled
+            value="1XIEOLE5HeJkaxh6EY8qKQ_3KXBaJf7EkjHbZnLfFnig"
+          />
+          <button>open sheet</button>
         </div>
       </div>
     </div>
