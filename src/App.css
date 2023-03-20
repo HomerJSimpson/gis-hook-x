@@ -43,3 +43,8 @@
   gap: 2px;
   padding: 0 2px;
 }
+
+.debug {
+  text-align: left;
+  padding:4px;
+}

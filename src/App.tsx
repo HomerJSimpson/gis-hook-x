@@ -1,10 +1,10 @@
-import './App.css';
+import "./App.css";
 
-import * as React from 'react';
+import * as React from "react";
 
-import jwt_decode from 'jwt-decode';
-
-import useScript from './use-script';
+import jwt_decode from "jwt-decode";
+import useGoogleSheet from "./use-google-sheet";
+import useScript from "./use-script";
 
 interface IHookArgs {
   googleBtnRef: any;
@@ -16,9 +16,11 @@ declare global {
     google: any;
   }
 }
+/*
 const DISCOVERY_DOC =
   "https://sheets.googleapis.com/$discovery/rest?version=v4";
 const SCOPES = "https://www.googleapis.com/auth/spreadsheets";
+*/
 
 function useGoogleAuth(args: IHookArgs) {
   const status = useScript("https://accounts.google.com/gsi/client");
@@ -82,6 +84,16 @@ function GISProfileCard(gisProfileCardArgs: GISProfileCardArgs) {
 }
 
 function App() {
+  const {
+    status: sStatus,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    data,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    error,
+    onOpenSheet
+  } = useGoogleSheet({
+    spreadsheetId: "1XIEOLE5HeJkaxh6EY8qKQ_3KXBaJf7EkjHbZnLfFnig",
+  });
   const googleBtnRef = React.useRef(null);
   const { status, credential } = useGoogleAuth({
     googleBtnRef: googleBtnRef.current,
@@ -102,9 +114,11 @@ function App() {
             disabled
             value="1XIEOLE5HeJkaxh6EY8qKQ_3KXBaJf7EkjHbZnLfFnig"
           />
-          <button>open sheet</button>
+          <button onClick={onOpenSheet}>open sheet</button>
         </div>
       </div>
+      <div className="debug"><h6>useGoogleSpreadsheet</h6>
+      <span>Current value of status: {sStatus}</span></div>
     </div>
   );
 }
